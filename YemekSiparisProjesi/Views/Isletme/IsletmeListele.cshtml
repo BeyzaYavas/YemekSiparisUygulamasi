@@ -1,0 +1,142 @@
+﻿@using YemekSiparisProjesi.Models;
+@model List<Isletme>
+
+@{
+    ViewBag.Title = "IsletmeListele";
+}
+
+@section body{
+    <div class="modal" id="modalSilme" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">İşletme Sil</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="isAd"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="isSil" class="btn btn-primary">Sil</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<div class="col-md-12">
+    <div class="table-responsive">
+        <div class="heading_container heading_center">
+            <h2>
+                İŞLETMELER
+            </h2>
+        </div>
+        @if (User.IsInRole("İşletme"))
+        {
+            <div><a href="/Isletme/IsletmeEkle"><button type="button" class="btn btn-danger btn-sm">İşletme Ekle</button></a></div>
+        }
+        
+        <br />
+        <table class="table table-hover table-primary">
+            <thead>
+                @if (User.IsInRole("Admin") || User.IsInRole("İşletme"))
+                {
+                    <tr>
+                        <th scope="col">İşletme Numarası</th>
+                        <th scope="col">İşletme Adı</th>
+                        <th scope="col">İşletme Sayfası</th>
+                        <th scope="col">İşletme Sil</th>
+                        <th scope="col">İşletme Güncelle</th>
+
+                    </tr>
+                }
+              
+                @if (User.IsInRole("Kullanıcı") )
+                {
+                    <tr>
+                        <th scope="col">İşletme Numarası</th>
+                        <th scope="col">İşletme Adı</th>
+                        <th scope="col">İşletme Sayfası</th>
+
+                    </tr>
+                }
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@item.IsletmeNo</td>
+                        <td>@item.IsletmeAd</td>
+
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("İşletme"))
+                        {
+                            <td><a href="/Isletme/IsletmeSayfasi/@item.IsletmeNo"><button type="button" class="btn btn-primary btn-sm">Git</button></a></td>
+                            <td><button class="btn btn-danger modalAc" data-isletmead="@item.IsletmeAd" data-isno="@item.IsletmeNo" data-toggle="modal" data-target="#modalSilme"> Sil </button> </td>
+                            <td><a href="/Isletme/IsletmeGuncelle/@item.IsletmeNo"><button type="button" class="btn btn-warning btn-sm">Güncelle</button></a></td>
+                        }
+                        
+                        @if (User.IsInRole("Kullanıcı"))
+                        {
+                            <td><a href="/Isletme/IsletmeSayfasi/@item.IsletmeNo"><button type="button" class="btn btn-primary btn-sm">Git</button></a></td>
+                        }
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Content/js/jquery-3.4.1.min.js"></script>
+    <script>
+        /*sayfadaki isletme silme butonu*/
+        $(".modalAc").click(function () {
+            var isletmeAdi = $(this).data("isletmead");
+            //alert(isletmeAdi);
+            var no = $(this).data("isno");
+            $(".modal-body>p.isAd").html(isletmeAdi + "  isimli işletmeyi silmek istiyor musunuz? İşletmeNo: " + no);
+            $("#isSil").data("isNo", no);
+
+        });
+
+        /*modaldaki silme metodu*/
+
+        $("#isSil").click(function () {
+            var no = $(this).data("isNo");
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Isletme/IsletmeSil/" + no,
+                success: function () {
+
+                    alert("başarılı");
+                    window.location.replace("/Isletme/IsletmeListele");
+
+
+                },
+                error: function () {
+                    alert("başarısız");
+                }
+
+            });
+
+        });
+
+
+    </script>
+
+}
+

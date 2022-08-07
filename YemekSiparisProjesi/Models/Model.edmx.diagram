@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3ff9d5748cef4eb6b70a4f7b19ac19e2" Name="Diagram1">
+        <EntityTypeShape EntityType="YemekSiparisModel.Fatura" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.GirisTip" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Icecek" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Isletme" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.IsletmeKullanici" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Kullanici" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.KullaniciTip" Width="1.5" PointX="3.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Kurye" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Menu" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Siparis" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Yiyecek" Width="1.5" PointX="3.75" PointY="11.5" IsExpanded="true" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Fatura__SiparisN__23F3538A" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__GirisTip__Kullan__42ACE4D4" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__GirisTip__Kullan__54CB950F" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Menu__IcecekNo__7CD98669" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__IsletmeKu__Islet__2EA5EC27" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Kurye__IsletmeNo__67DE6983" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Menu__IsletmeNo__7DCDAAA2" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__IsletmeKu__Kulla__43A1090D" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Siparis__Kullani__00AA174D" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Menu__YiyecekNo__0E04126B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Menu_Gor" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="YemekSiparisModel.User_Roles" Width="1.5" PointX="8.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

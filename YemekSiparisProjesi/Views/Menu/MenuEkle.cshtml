@@ -1,0 +1,81 @@
+﻿@using YemekSiparisProjesi.Models;
+@model Menu
+@{
+    ViewBag.Title = "MenuEkle";
+}
+
+
+<div class="heading_container heading_center">
+    <h2>
+        MENÜ EKLE
+    </h2>
+</div>
+
+<div class="col-lg-10 mx-auto">
+    <form action="/Menu/MenuEkle" method="post" role="form">
+        @*@if (Model != null)
+        {
+            <label>Menü No = @Model.MenuNo </label>
+            <input type="hidden" name="IsletmeNo" value="@Model.MenuNo" />
+        }*@
+        <div class="form-group">
+            <label for="exampleInputEmail1">Menü Adı</label>
+            @if (Model.MenuAd == null)
+            {
+                <input value="" type="text" class="form-control" id="exampleInputEmail1" placeholder="Menü Adını Giriniz" name="MenuAd">
+            }
+            else
+            {
+                <input value="@Model.MenuAd" type="text" class="form-control" id="exampleInputEmail1" placeholder="Menü Adını Giriniz" name="MenuAd">
+            }
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Menü Fiyatı</label>
+            @if (Model.MenuAd == null)
+            {
+                <input value="" type="number" class="form-control" id="exampleInputEmail1" placeholder="Fiyat" name="MenuFiyat">
+            }
+            else
+            {
+                <input value="@Model.MenuFiyat" type="number" class="form-control" id="exampleInputEmail1" placeholder="Fiyat" name="MenuFiyat">
+            }
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Menünün Ekleneceği İşletme</label>
+            @if (Model.MenuAd == null)
+            {
+                <input value="" type="number" class="form-control" id="exampleInputEmail1" placeholder="İşletme No" name="IsletmeNo">
+            }
+            else
+            {
+                <input value="@Model.IsletmeNo" type="number" class="form-control" id="exampleInputEmail1" placeholder="İşletme No" name="IsletmeNo">
+            }
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Menünün İçeceği</label>
+            @if (Model.MenuAd == null)
+            {
+                <input value="" type="number" class="form-control" id="exampleInputEmail1" placeholder="İçecek No" name="IcecekNo">
+            }
+            else
+            {
+                <input value="@Model.IcecekNo" type="number" class="form-control" id="exampleInputEmail1" placeholder="İçecek No" name="IcecekNo">
+            }
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Menünün Yiyeceği</label>
+            @if (Model.MenuAd == null)
+            {
+                <input value="" type="number" class="form-control" id="exampleInputEmail1" placeholder="Yiyecek No" name="YiyecekNo">
+            }
+            else
+            {
+                <input value="@Model.YiyecekNo" type="number" class="form-control" id="exampleInputEmail1" placeholder="Yiyecek No" name="YiyecekNo">
+            }
+        </div>
+
+
+        <button type="submit" class="btn btn-info">Kaydet</button>
+    </form>
+</div>
+

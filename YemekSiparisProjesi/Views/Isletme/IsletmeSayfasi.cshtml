@@ -1,0 +1,317 @@
+﻿@using YemekSiparisProjesi.Models;
+@model List<Menu_Gor>
+
+@{
+    ViewBag.Title = "IsletmeSayfasi";
+}
+@section body{
+    <div class="modal" id="modalEkle" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sipariş Oluştur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="bilgi"></p>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="siparisTamamla" class="btn btn-primary">Siparisi Tamamla</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<section class="news_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Restoran'ın Popülerleri
+            </h2>
+        </div>
+        <br />
+        @if (User.IsInRole("İşletme"))
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="box">
+                        <div><a href="/Menu/MenuEkle/"><button type="button" class="btn btn-warning btn-sm">Menu Ekle</button></a></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div><a href="/Yiyecek/yiyecekEkle"><button type="button" class="btn btn-warning btn-sm">Yiyecek Ekle</button></a></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div><a href="/Icecek/IcecekEkle"><button type="button" class="btn btn-warning btn-sm">İçecek Ekle</button></a></div>
+                    </div>
+                </div>
+            </div>
+                }
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="~/Content/images/r2.jpg" class="box-img" alt="">
+                            </div>
+                            <br />
+                            <div class="detail-box">
+                                <h4>
+                                    Senin İçin Lezzetli Menüler
+                                </h4>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Menü Numarası</th>
+                                                <th scope="col">Menü Adı</th>
+                                                <th scope="col">Menü Fiyatı</th>
+                                                <th scope="col">Sipariş Ver</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.IsletmeNo == ViewBag.Index)
+                                                {
+                                                    <tr>
+                                                        <th scope="row">@item.MenuNo</th>
+                                                        <td>@item.MenuAd</td>
+                                                        <td><span id=”sonuc”>@item.MenuFiyat</span></td>
+                                                        <td><button class="btn btn-danger modalAcMenu" data-menufiyat="@item.MenuFiyat" data-menuad="@item.MenuAd" data-menuno="@item.MenuNo" data-toggle="modal" data-target="#modalEkle"> Ekle </button> </td>
+                                                        @*<td><a href="/Siparis/Index"><button type="button" class="btn ">Ekle</button></a></td>*@
+
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="~/Content/images/r3.jpg" class="box-img" alt="">
+                            </div>
+                            <br />
+                            <div class="detail-box">
+                                <h4>
+                                    Tam Sana Göre Yiyecekler
+                                </h4>
+                                <div class="table-responsive">
+                                    <table class="table table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Yiyecek Numarası</th>
+                                                <th scope="col">Yiyecek Adı</th>
+                                                <th scope="col">Yiyecek Fiyat</th>
+                                                <th scope="col">Sipariş Ver</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.IsletmeNo == ViewBag.Index)
+                                                {
+                                                    <tr>
+                                                        <th scope="row">@item.YiyecekNo</th>
+                                                        <td>@item.YiyecekAd</td>
+                                                        <td>@item.YiyecekFiyat</td>
+                                                        <td><button class="btn btn-danger modalAcYiyecek" data-yiyecekfiyat="@item.YiyecekFiyat" data-yiyecekad="@item.YiyecekAd" data-yiyecekno="@item.YiyecekNo" data-toggle="modal" data-target="#modalEkle"> Ekle </button></td>
+                                                        @*<td><a href="/Sepet/Index"><button type="button" class="btn ">Ekle</button></a></td>*@
+
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="~/Content/images/r4.jpg" class="box-img" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h4>
+                                    Sana Özel İçecekler
+                                </h4>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">İçecek Numarası</th>
+                                                <th scope="col">İçecek Adı</th>
+                                                <th scope="col">İçecek Fiyat</th>
+                                                <th scope="col">Sipariş Ver</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.IsletmeNo == ViewBag.Index)
+                                                {
+                                                    <tr>
+                                                        <th scope="row">@item.IcecekNo</th>
+                                                        <td>@item.IcecekAd</td>
+                                                        <td>@item.IcecekFiyat</td>
+                                                        <td><button class="btn btn-danger modalAcIcecek" data-icecekfiyat="@item.IcecekFiyat" data-icecekad="@item.IcecekAd" data-icecekno="@item.IcecekNo" data-toggle="modal" data-target="#modalEkle"> Ekle </button></td>
+                                                        @*<td><a href="/Sepet/Index"><button type="button" class="btn ">Ekle</button></a></td>*@
+
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+
+<!-- end news section -->
+@section scripts{
+    <script src="~/Content/js/jquery-3.4.1.min.js"></script>
+    <script>
+        /*sayfadaki menu için ekle butonu*/
+        $(".modalAcMenu").click(function () {
+            var menuad = $(this).data("menuad");
+            var menufiyat = $(this).data("menufiyat");
+            
+            $(".modal-body>p.bilgi").html(menuad + "  siparişi vermek istiyor musunuz? Menu Fiyat: " + menufiyat);
+            $("#siparisTamamla").data("menufiyat", menufiyat);
+            $("#siparisTamamla").data("menuad", menuad);
+            
+
+        });
+
+        /*modaldaki menu için ekle metodu*/
+
+        $("#siparisTamamla").click(function () {
+            
+
+            var menufiyat = $(this).data("menufiyat");
+            /*var menuad = $(this).data("menuad");*/
+            
+            $.ajax({
+
+                type: "POST",
+                url: "/Siparis/SiparisEkle/" + menufiyat,
+                data: {"id":menufiyat},
+                success: function () {
+
+                    window.location.replace("/Isletme/IsletmeListele");
+
+
+                },
+                error: function () {
+                    window.location.replace("/Isletme/IsletmeListele");
+                }
+
+            });
+
+        });
+
+        /*sayfadaki yiyecek için ekle butonu*/
+        $(".modalAcYiyecek").click(function () {
+            var yiyecekad = $(this).data("yiyecekad");
+            var yiyecekfiyat = $(this).data("yiyecekfiyat");
+
+            $(".modal-body>p.bilgi").html(yiyecekad + "  siparişi vermek istiyor musunuz? Yiyecek Fiyat: " + yiyecekfiyat);
+            $("#siparisTamamla").data("yiyecekad", yiyecekad);
+            $("#siparisTamamla").data("yiyecekfiyat", yiyecekfiyat);
+
+
+        });
+        /*modaldaki yiyecek için ekle metodu*/
+
+        $("#siparisTamamla").click(function () {
+
+
+            var yiyecekfiyat = $(this).data("yiyecekfiyat");
+            var yiyecekad = $(this).data("yiyecekad");
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Siparis/SiparisEkle/" + yiyecekfiyat,
+                /*data: { "id": yiyecekfiyat },*/
+                success: function () {
+                    /*alert("basarılı");*/
+                    window.location.replace("/Isletme/IsletmeListele");
+
+
+                },
+                error: function () {
+                    /*alert("basarısız");*/
+                    window.location.replace("/Isletme/IsletmeListele");
+                }
+
+            });
+
+        });
+
+        /*sayfadaki icecek için ekle butonu*/
+        $(".modalAcIcecek").click(function () {
+            var icecekad = $(this).data("icecekad");
+            var icecekfiyat = $(this).data("icecekfiyat");
+
+            $(".modal-body>p.bilgi").html(icecekad + "  siparişi vermek istiyor musunuz? İçecek Fiyat: " + icecekfiyat);
+            $("#siparisTamamla").data("icecekfiyat", icecekfiyat);
+            $("#siparisTamamla").data("icecekad", icecekad);
+        });
+        /*modaldaki icecek için ekle metodu*/
+
+        $("#siparisTamamla").click(function () {
+
+
+            var icecekfiyat = $(this).data("icecekfiyat");
+            /*var icecekad = $(this).data("icecekkad");*/
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Siparis/SiparisEkle/" + icecekfiyat,
+                /*data: { "id": yiyecekfiyat },*/
+                success: function () {
+                    alert("basarılı");
+                    window.location.replace("/Isletme/IsletmeListele");
+
+
+                },
+                error: function () {
+                    alert("basarısız");
+                    window.location.replace("/Isletme/IsletmeListele");
+                }
+
+            });
+
+        });
+
+
+    </script>
+
+}

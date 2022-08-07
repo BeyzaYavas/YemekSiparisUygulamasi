@@ -1,0 +1,33 @@
+﻿@using YemekSiparisProjesi.Models;
+@*@model List<Isletme>*@
+@{
+    ViewBag.Title = "IsletmeBul";
+}
+
+<div class="col-md-12">
+    <div class="table-responsive">
+        <table class="table table-hover table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">İşletme Numarası</th>
+                    <th scope="col">İşletme Adı</th>
+                    <th scope="col">İşletme Sayfası</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.IsletmeBul as List<Isletme>)
+                {
+                    <tr>
+                        <td>@item.IsletmeNo</td>
+                        <td>@item.IsletmeAd</td>
+
+                        <td><a href="/Isletme/IsletmeSayfasi/@item.IsletmeNo"><button type="button" class="btn btn-primary btn-sm">Git</button></a></td>
+                     
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

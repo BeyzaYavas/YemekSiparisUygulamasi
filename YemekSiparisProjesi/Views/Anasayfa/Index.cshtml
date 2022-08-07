@@ -1,0 +1,75 @@
+﻿@using YemekSiparisProjesi.Models;
+@model Isletme
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>AnasayfaIndex</h2>*@
+
+
+
+<!-- slider section -->
+<section class="slider_section ">
+    <div class="container ">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="detail-box">
+                    <h1>
+                        Restoranları Keşfet
+                    </h1>
+                    <p>
+                        Sana en uygun yemeği seç
+                    </p>
+                </div>
+                <div class="find_container ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <form action="/Anasayfa/IsletmeBul" method="get" role="form">
+                                    <div class="form-row ">
+                                        <div class="form-group col-lg-5">
+                                            <input type="text" class="form-control" id="inputHotel" placeholder="Restoran İsmi" name="IsletmeAd">
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="btn-box">
+
+                                                <button type="submit" class="btn ">Ara</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="news_section layout_padding">
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="~/Content/images/n1.jpg" class="box-img" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="~/Content/images/n2.jpg" class="box-img" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

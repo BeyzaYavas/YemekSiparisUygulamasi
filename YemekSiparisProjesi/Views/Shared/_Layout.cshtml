@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>söyleGelsin</title>
+
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+
+    <!-- font awesome style -->
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- nice select -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+    <!-- slidck slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css.map" integrity="undefined" crossorigin="anonymous" />
+
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+
+    <!--bootstrap icon-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    @RenderSection("head", required: false)
+</head>
+
+<body>
+
+    <div class="hero_area">
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="/Anasayfa/Index">
+                        <span>
+                            söyleGelsin
+                        </span>
+                    </a>
+                    <div class="" id="">
+                        <div class="User_option">
+                            <a href="">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span>@HttpContext.Current.User.Identity.Name</span>
+                            </a>
+                            <a href="/Siparis/Index">
+                                <i class="fa fa-shopping-bag"></i>
+                                <span>Siparişler</span>
+                            </a>
+
+                        </div>
+
+                        <div class="custom_menu-btn">
+                            <button onclick="openNav()">
+                                <img src="~/Content/images/menu.png" alt="">
+                            </button>
+                        </div>
+                        <div id="myNav" class="overlay">
+                            <div class="overlay-content">
+                                @if ( User.IsInRole("Kullanıcı"))
+                                {
+                                    <a href="/Anasayfa/Index">Anasayfa</a>
+                                    <a href="/Isletme/IsletmeListele">Restoranlar</a>                                    
+                                    @*<a href="/Kullanici/Login">Giriş Yap</a>*@
+                                    <a href="/Kullanici/Logout">Çıkış Yap</a>
+                                }
+                                @if (User.IsInRole("Admin") || User.IsInRole("İşletme") )
+                                {
+                                    <a href="/Anasayfa/Index">Anasayfa</a>
+                                    <a href="/Isletme/IsletmeListele">Restoranlar</a>
+                                    <a href="/Kurye/KuryeListele">Kuryeler</a>
+                                    @*<a href="/Kullanici/Login">Giriş Yap</a>*@
+                                    <a href="/Kullanici/Logout">Çıkış Yap</a>
+                                }
+                                @if (!User.IsInRole("Admin") && !User.IsInRole("İşletme") && !User.IsInRole("Kullanıcı"))
+                                {
+                                    <a href="/Anasayfa/Index">Anasayfa</a>
+                                    <a href="/Isletme/IsletmeListele">Restoranlar</a>
+                                    <a href="/Kullanici/Login">Giriş Yap</a>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+        @RenderBody()
+        <hr />
+        <!-- footer section -->
+        <footer class="footer_section">
+            <div class="container">
+                <p>&copy; @DateTime.Now.Year - söyleGelsin</p>
+            </div>
+        </footer>
+        <!-- footer section -->
+        @RenderSection("body", required: false)
+    </div>
+    <!-- jQery -->
+    <script src="~/Content/js/jquery-3.4.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/Content/js/bootstrap.js"></script>
+    <!-- slick  slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+    <!-- nice select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+    <!-- custom js -->
+    <script src="~/Content/js/custom.js"></script>
+
+    @RenderSection("scripts", required:false)
+
+</body>
+</html>

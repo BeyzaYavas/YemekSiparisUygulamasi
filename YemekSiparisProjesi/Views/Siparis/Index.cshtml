@@ -1,0 +1,42 @@
+﻿@using YemekSiparisProjesi.Models;
+@model List<Siparis>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-md-12">
+    <div class="table-responsive">
+        <div class="heading_container heading_center">
+            <h2>
+                SİPARİŞLER
+            </h2>
+        </div>
+        
+        <br />
+        <table class="table table-hover table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Sipariş Numarası</th>
+                    <th scope="col">Sipariş Tarih</th>
+                    <th scope="col">Sipariş Veren Müşteri</th>
+                    @*<th scope="col">Sipariş Adresi</th>*@
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.SiparisNo</td>
+                        <td>@item.SiparisTarih</td>
+                        <td>@item.Kullanici.KullaniciAd @item.Kullanici.KullaniciSoyad</td>
+                        @*<td>@item.SiparisAdres</td>*@
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

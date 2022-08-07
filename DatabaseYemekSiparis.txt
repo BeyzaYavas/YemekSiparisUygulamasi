@@ -1,0 +1,122 @@
+Create database [YemekSiparis]
+go
+Use [YemekSiparis]
+go
+CREATE TABLE [dbo].[Fatura] (
+    [FaturaNo]     INT           IDENTITY (1, 1) NOT NULL,
+    [OdemeBilgisi] NVARCHAR (50) NULL,
+    [FaturaTarih]  DATE          NULL,
+    [SiparisNo]    INT           NULL,
+    PRIMARY KEY CLUSTERED ([FaturaNo] ASC),
+    FOREIGN KEY ([SiparisNo]) REFERENCES [dbo].[Siparis] ([SiparisNo])
+);
+go
+
+CREATE TABLE [dbo].[GirisTip] (
+    [GirisTipNo]     INT IDENTITY (1, 1) NOT NULL,
+    [KullaniciTipNo] INT NULL,
+    [KullaniciNo]    INT NULL,
+    PRIMARY KEY CLUSTERED ([GirisTipNo] ASC),
+    FOREIGN KEY ([KullaniciNo]) REFERENCES [dbo].[Kullanici] ([KullaniciNo]),
+    FOREIGN KEY ([KullaniciTipNo]) REFERENCES [dbo].[KullaniciTip] ([KullaniciTipNo])
+);
+go
+
+CREATE TABLE [dbo].[Icecek] (
+    [IcecekNo]    INT           IDENTITY (1, 1) NOT NULL,
+    [IcecekAd]    NVARCHAR (50) NULL,
+    [IcecekFiyat] FLOAT (53)    NULL,
+    [IcecekAdet]  INT           NULL,
+    PRIMARY KEY CLUSTERED ([IcecekNo] ASC)
+);
+go
+
+CREATE TABLE [dbo].[Isletme] (
+    [IsletmeNo]    INT           IDENTITY (1, 1) NOT NULL,
+    [IsletmeAd]    NVARCHAR (50) NULL,
+    [IsletmeTelNo] INT           NULL,
+    PRIMARY KEY CLUSTERED ([IsletmeNo] ASC)
+);
+go
+
+CREATE TABLE [dbo].[IsletmeKullanici] (
+    [IKNo]        INT IDENTITY (1, 1) NOT NULL,
+    [IsletmeNo]   INT NULL,
+    [KullaniciNo] INT NULL,
+    PRIMARY KEY CLUSTERED ([IKNo] ASC),
+    FOREIGN KEY ([IsletmeNo]) REFERENCES [dbo].[Isletme] ([IsletmeNo]),
+    FOREIGN KEY ([KullaniciNo]) REFERENCES [dbo].[Kullanici] ([KullaniciNo])
+);
+go
+CREATE TABLE [dbo].[Kullanici] (
+    [KullaniciNo]    INT           IDENTITY (1, 1) NOT NULL,
+    [KullaniciAd]    NVARCHAR (50) NULL,
+    [KullaniciSoyad] NVARCHAR (50) NULL,
+    [KullaniciTelNo] INT           NULL,
+    [MailAdress]     NVARCHAR (50) NULL,
+    [KullaniciSifre] NVARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([KullaniciNo] ASC),
+    UNIQUE NONCLUSTERED ([MailAdress] ASC)
+);
+go
+CREATE TABLE [dbo].[KullaniciTip] (
+    [KullaniciTipNo]  INT           IDENTITY (1, 1) NOT NULL,
+    [KullaniciTipiAd] NVARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([KullaniciTipNo] ASC)
+);
+go
+
+CREATE TABLE [dbo].[Kurye] (
+    [KuryeNo]    INT           IDENTITY (1, 1) NOT NULL,
+    [KuryeAd]    NVARCHAR (50) NULL,
+    [KuryeSoyad] NVARCHAR (50) NULL,
+    [KuryeTelNo] INT           NULL,
+    [IsletmeNo]  INT           NULL,
+    PRIMARY KEY CLUSTERED ([KuryeNo] ASC),
+    FOREIGN KEY ([IsletmeNo]) REFERENCES [dbo].[Isletme] ([IsletmeNo])
+);
+go
+CREATE TABLE [dbo].[Menu] (
+    [MenuNo]    INT           IDENTITY (1, 1) NOT NULL,
+    [IsletmeNo] INT           NULL,
+    [IcecekNo]  INT           NULL,
+    [YiyecekNo] INT           NULL,
+    [MenuAd]    NVARCHAR (50) NULL,
+    [MenuFiyat] FLOAT (53)    NULL,
+    PRIMARY KEY CLUSTERED ([MenuNo] ASC),
+    FOREIGN KEY ([YiyecekNo]) REFERENCES [dbo].[Yiyecek] ([YiyecekNo]),
+    FOREIGN KEY ([IcecekNo]) REFERENCES [dbo].[Icecek] ([IcecekNo]),
+    FOREIGN KEY ([IsletmeNo]) REFERENCES [dbo].[Isletme] ([IsletmeNo])
+);
+go
+CREATE TABLE [dbo].[Siparis] (
+    [SiparisNo]    INT           IDENTITY (1, 1) NOT NULL,
+    [SiparisTarih] DATE          NULL,
+    [SiparisTutar] FLOAT (53)    NULL,
+    [SiparisAdres] VARCHAR (255) NULL,
+    [KullaniciNo]  INT           NULL,
+    PRIMARY KEY CLUSTERED ([SiparisNo] ASC),
+    FOREIGN KEY ([KullaniciNo]) REFERENCES [dbo].[Kullanici] ([KullaniciNo])
+);
+go
+CREATE TABLE [dbo].[Yiyecek] (
+    [YiyecekNo]    INT           IDENTITY (1, 1) NOT NULL,
+    [YiyecekAd]    NVARCHAR (50) NULL,
+    [HazirlikSure] INT           NULL,
+    [YiyecekFiyat] FLOAT (53)    NULL,
+    [YiyecekAdet]  INT           NULL,
+    PRIMARY KEY CLUSTERED ([YiyecekNo] ASC)
+);
+go
+Create view Menu_Gor as Select m.IsletmeNo,m.MenuFiyat,m.MenuAd,m.MenuNo,
+i.IcecekNo,i.IcecekAd,i.IcecekFiyat,y.YiyecekNo,y.YiyecekAd,y.YiyecekFiyat
+from Icecek as i
+Join Menu as m on i.IcecekNo=m.IcecekNo
+Join Yiyecek as y on m.YiyecekNo=y.YiyecekNo
+go
+CREATE VIEW User_Roles as select k.KullaniciNo,k.KullaniciAd,k.MailAdress,g.KullaniciTipNo,kt.KullaniciTipiAd
+from Kullanici as k
+join GirisTip as g on k.KullaniciNo = g.KullaniciNo
+join KullaniciTip as kt on g.KullaniciTipNo = kt.KullaniciTipNo
+go
+

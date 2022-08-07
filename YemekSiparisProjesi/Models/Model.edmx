@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="YemekSiparisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="FaturaNo" />
+          </Key>
+          <Property Name="FaturaNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OdemeBilgisi" Type="nvarchar" MaxLength="50" />
+          <Property Name="FaturaTarih" Type="date" />
+          <Property Name="SiparisNo" Type="int" />
+        </EntityType>
+        <EntityType Name="GirisTip">
+          <Key>
+            <PropertyRef Name="GirisTipNo" />
+          </Key>
+          <Property Name="GirisTipNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciTipNo" Type="int" />
+          <Property Name="KullaniciNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Icecek">
+          <Key>
+            <PropertyRef Name="IcecekNo" />
+          </Key>
+          <Property Name="IcecekNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IcecekAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="IcecekFiyat" Type="float" />
+          <Property Name="IcecekAdet" Type="int" />
+        </EntityType>
+        <EntityType Name="Isletme">
+          <Key>
+            <PropertyRef Name="IsletmeNo" />
+          </Key>
+          <Property Name="IsletmeNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsletmeAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsletmeTelNo" Type="int" />
+        </EntityType>
+        <EntityType Name="IsletmeKullanici">
+          <Key>
+            <PropertyRef Name="IKNo" />
+          </Key>
+          <Property Name="IKNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsletmeNo" Type="int" />
+          <Property Name="KullaniciNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="KullaniciSoyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="KullaniciTelNo" Type="int" />
+          <Property Name="MailAdress" Type="nvarchar" MaxLength="50" />
+          <Property Name="KullaniciSifre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KullaniciTip">
+          <Key>
+            <PropertyRef Name="KullaniciTipNo" />
+          </Key>
+          <Property Name="KullaniciTipNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciTipiAd" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Kurye">
+          <Key>
+            <PropertyRef Name="KuryeNo" />
+          </Key>
+          <Property Name="KuryeNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KuryeAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="KuryeSoyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="KuryeTelNo" Type="int" />
+          <Property Name="IsletmeNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuNo" />
+          </Key>
+          <Property Name="MenuNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsletmeNo" Type="int" />
+          <Property Name="IcecekNo" Type="int" />
+          <Property Name="YiyecekNo" Type="int" />
+          <Property Name="MenuAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="MenuFiyat" Type="float" />
+        </EntityType>
+        <EntityType Name="Siparis">
+          <Key>
+            <PropertyRef Name="SiparisNo" />
+          </Key>
+          <Property Name="SiparisNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiparisTarih" Type="date" />
+          <Property Name="SiparisTutar" Type="float" />
+          <Property Name="SiparisAdres" Type="varchar" MaxLength="255" />
+          <Property Name="KullaniciNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Yiyecek">
+          <Key>
+            <PropertyRef Name="YiyecekNo" />
+          </Key>
+          <Property Name="YiyecekNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YiyecekAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="HazirlikSure" Type="int" />
+          <Property Name="YiyecekFiyat" Type="float" />
+          <Property Name="YiyecekAdet" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'YemekSiparis.dbo.Menu_Gor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Menu_Gor">
+          <Key>
+            <PropertyRef Name="MenuNo" />
+            <PropertyRef Name="IcecekNo" />
+            <PropertyRef Name="YiyecekNo" />
+          </Key>
+          <Property Name="IsletmeNo" Type="int" />
+          <Property Name="MenuFiyat" Type="float" />
+          <Property Name="MenuAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="MenuNo" Type="int" Nullable="false" />
+          <Property Name="IcecekNo" Type="int" Nullable="false" />
+          <Property Name="IcecekAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="IcecekFiyat" Type="float" />
+          <Property Name="YiyecekNo" Type="int" Nullable="false" />
+          <Property Name="YiyecekAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="YiyecekFiyat" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'YemekSiparis.dbo.User_Roles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User_Roles">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="int" Nullable="false" />
+          <Property Name="KullaniciAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="MailAdress" Type="nvarchar" MaxLength="50" />
+          <Property Name="KullaniciTipNo" Type="int" />
+          <Property Name="KullaniciTipiAd" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Fatura__SiparisN__23F3538A">
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="0..1" />
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparis">
+              <PropertyRef Name="SiparisNo" />
+            </Principal>
+            <Dependent Role="Fatura">
+              <PropertyRef Name="SiparisNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GirisTip__Kullan__42ACE4D4">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="GirisTip" Type="Self.GirisTip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Principal>
+            <Dependent Role="GirisTip">
+              <PropertyRef Name="KullaniciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GirisTip__Kullan__54CB950F">
+          <End Role="KullaniciTip" Type="Self.KullaniciTip" Multiplicity="0..1" />
+          <End Role="GirisTip" Type="Self.GirisTip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciTip">
+              <PropertyRef Name="KullaniciTipNo" />
+            </Principal>
+            <Dependent Role="GirisTip">
+              <PropertyRef Name="KullaniciTipNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IsletmeKu__Islet__2EA5EC27">
+          <End Role="Isletme" Type="Self.Isletme" Multiplicity="0..1" />
+          <End Role="IsletmeKullanici" Type="Self.IsletmeKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Isletme">
+              <PropertyRef Name="IsletmeNo" />
+            </Principal>
+            <Dependent Role="IsletmeKullanici">
+              <PropertyRef Name="IsletmeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IsletmeKu__Kulla__43A1090D">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="IsletmeKullanici" Type="Self.IsletmeKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Principal>
+            <Dependent Role="IsletmeKullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kurye__IsletmeNo__67DE6983">
+          <End Role="Isletme" Type="Self.Isletme" Multiplicity="0..1" />
+          <End Role="Kurye" Type="Self.Kurye" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Isletme">
+              <PropertyRef Name="IsletmeNo" />
+            </Principal>
+            <Dependent Role="Kurye">
+              <PropertyRef Name="IsletmeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__IcecekNo__7CD98669">
+          <End Role="Icecek" Type="Self.Icecek" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Icecek">
+              <PropertyRef Name="IcecekNo" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="IcecekNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__IsletmeNo__7DCDAAA2">
+          <End Role="Isletme" Type="Self.Isletme" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Isletme">
+              <PropertyRef Name="IsletmeNo" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="IsletmeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__YiyecekNo__0E04126B">
+          <End Role="Yiyecek" Type="Self.Yiyecek" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yiyecek">
+              <PropertyRef Name="YiyecekNo" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="YiyecekNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Siparis__Kullani__00AA174D">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="KullaniciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YemekSiparisModelStoreContainer">
+          <EntitySet Name="Fatura" EntityType="Self.Fatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GirisTip" EntityType="Self.GirisTip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Icecek" EntityType="Self.Icecek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Isletme" EntityType="Self.Isletme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IsletmeKullanici" EntityType="Self.IsletmeKullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciTip" EntityType="Self.KullaniciTip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kurye" EntityType="Self.Kurye" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siparis" EntityType="Self.Siparis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yiyecek" EntityType="Self.Yiyecek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu_Gor" EntityType="Self.Menu_Gor" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Menu_Gor].[IsletmeNo] AS [IsletmeNo], 
+    [Menu_Gor].[MenuFiyat] AS [MenuFiyat], 
+    [Menu_Gor].[MenuAd] AS [MenuAd], 
+    [Menu_Gor].[MenuNo] AS [MenuNo], 
+    [Menu_Gor].[IcecekNo] AS [IcecekNo], 
+    [Menu_Gor].[IcecekAd] AS [IcecekAd], 
+    [Menu_Gor].[IcecekFiyat] AS [IcecekFiyat], 
+    [Menu_Gor].[YiyecekNo] AS [YiyecekNo], 
+    [Menu_Gor].[YiyecekAd] AS [YiyecekAd], 
+    [Menu_Gor].[YiyecekFiyat] AS [YiyecekFiyat]
+    FROM [dbo].[Menu_Gor] AS [Menu_Gor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_Roles" EntityType="Self.User_Roles" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User_Roles].[KullaniciNo] AS [KullaniciNo], 
+    [User_Roles].[KullaniciAd] AS [KullaniciAd], 
+    [User_Roles].[MailAdress] AS [MailAdress], 
+    [User_Roles].[KullaniciTipNo] AS [KullaniciTipNo], 
+    [User_Roles].[KullaniciTipiAd] AS [KullaniciTipiAd]
+    FROM [dbo].[User_Roles] AS [User_Roles]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Fatura__SiparisN__23F3538A" Association="Self.FK__Fatura__SiparisN__23F3538A">
+            <End Role="Siparis" EntitySet="Siparis" />
+            <End Role="Fatura" EntitySet="Fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GirisTip__Kullan__42ACE4D4" Association="Self.FK__GirisTip__Kullan__42ACE4D4">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="GirisTip" EntitySet="GirisTip" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GirisTip__Kullan__54CB950F" Association="Self.FK__GirisTip__Kullan__54CB950F">
+            <End Role="KullaniciTip" EntitySet="KullaniciTip" />
+            <End Role="GirisTip" EntitySet="GirisTip" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IsletmeKu__Islet__2EA5EC27" Association="Self.FK__IsletmeKu__Islet__2EA5EC27">
+            <End Role="Isletme" EntitySet="Isletme" />
+            <End Role="IsletmeKullanici" EntitySet="IsletmeKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IsletmeKu__Kulla__43A1090D" Association="Self.FK__IsletmeKu__Kulla__43A1090D">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="IsletmeKullanici" EntitySet="IsletmeKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kurye__IsletmeNo__67DE6983" Association="Self.FK__Kurye__IsletmeNo__67DE6983">
+            <End Role="Isletme" EntitySet="Isletme" />
+            <End Role="Kurye" EntitySet="Kurye" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__IcecekNo__7CD98669" Association="Self.FK__Menu__IcecekNo__7CD98669">
+            <End Role="Icecek" EntitySet="Icecek" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__IsletmeNo__7DCDAAA2" Association="Self.FK__Menu__IsletmeNo__7DCDAAA2">
+            <End Role="Isletme" EntitySet="Isletme" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__YiyecekNo__0E04126B" Association="Self.FK__Menu__YiyecekNo__0E04126B">
+            <End Role="Yiyecek" EntitySet="Yiyecek" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Siparis__Kullani__00AA174D" Association="Self.FK__Siparis__Kullani__00AA174D">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YemekSiparisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="FaturaNo" />
+          </Key>
+          <Property Name="FaturaNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OdemeBilgisi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FaturaTarih" Type="DateTime" Precision="0" />
+          <Property Name="SiparisNo" Type="Int32" />
+          <NavigationProperty Name="Siparis" Relationship="Self.FK__Fatura__SiparisN__23F3538A" FromRole="Fatura" ToRole="Siparis" />
+        </EntityType>
+        <EntityType Name="GirisTip">
+          <Key>
+            <PropertyRef Name="GirisTipNo" />
+          </Key>
+          <Property Name="GirisTipNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciTipNo" Type="Int32" />
+          <Property Name="KullaniciNo" Type="Int32" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK__GirisTip__Kullan__42ACE4D4" FromRole="GirisTip" ToRole="Kullanici" />
+          <NavigationProperty Name="KullaniciTip" Relationship="Self.FK__GirisTip__Kullan__54CB950F" FromRole="GirisTip" ToRole="KullaniciTip" />
+        </EntityType>
+        <EntityType Name="Icecek">
+          <Key>
+            <PropertyRef Name="IcecekNo" />
+          </Key>
+          <Property Name="IcecekNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IcecekAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IcecekFiyat" Type="Double" />
+          <Property Name="IcecekAdet" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__Menu__IcecekNo__7CD98669" FromRole="Icecek" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Isletme">
+          <Key>
+            <PropertyRef Name="IsletmeNo" />
+          </Key>
+          <Property Name="IsletmeNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsletmeAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsletmeTelNo" Type="Int32" />
+          <NavigationProperty Name="IsletmeKullanici" Relationship="Self.FK__IsletmeKu__Islet__2EA5EC27" FromRole="Isletme" ToRole="IsletmeKullanici" />
+          <NavigationProperty Name="Kurye" Relationship="Self.FK__Kurye__IsletmeNo__67DE6983" FromRole="Isletme" ToRole="Kurye" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__Menu__IsletmeNo__7DCDAAA2" FromRole="Isletme" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="IsletmeKullanici">
+          <Key>
+            <PropertyRef Name="IKNo" />
+          </Key>
+          <Property Name="IKNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsletmeNo" Type="Int32" />
+          <Property Name="KullaniciNo" Type="Int32" />
+          <NavigationProperty Name="Isletme" Relationship="Self.FK__IsletmeKu__Islet__2EA5EC27" FromRole="IsletmeKullanici" ToRole="Isletme" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK__IsletmeKu__Kulla__43A1090D" FromRole="IsletmeKullanici" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciTelNo" Type="Int32" />
+          <Property Name="MailAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GirisTip" Relationship="Self.FK__GirisTip__Kullan__42ACE4D4" FromRole="Kullanici" ToRole="GirisTip" />
+          <NavigationProperty Name="IsletmeKullanici" Relationship="Self.FK__IsletmeKu__Kulla__43A1090D" FromRole="Kullanici" ToRole="IsletmeKullanici" />
+          <NavigationProperty Name="Siparis" Relationship="Self.FK__Siparis__Kullani__00AA174D" FromRole="Kullanici" ToRole="Siparis" />
+        </EntityType>
+        <EntityType Name="KullaniciTip">
+          <Key>
+            <PropertyRef Name="KullaniciTipNo" />
+          </Key>
+          <Property Name="KullaniciTipNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciTipiAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GirisTip" Relationship="Self.FK__GirisTip__Kullan__54CB950F" FromRole="KullaniciTip" ToRole="GirisTip" />
+        </EntityType>
+        <EntityType Name="Kurye">
+          <Key>
+            <PropertyRef Name="KuryeNo" />
+          </Key>
+          <Property Name="KuryeNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KuryeAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KuryeSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KuryeTelNo" Type="Int32" />
+          <Property Name="IsletmeNo" Type="Int32" />
+          <NavigationProperty Name="Isletme" Relationship="Self.FK__Kurye__IsletmeNo__67DE6983" FromRole="Kurye" ToRole="Isletme" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuNo" />
+          </Key>
+          <Property Name="MenuNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsletmeNo" Type="Int32" />
+          <Property Name="IcecekNo" Type="Int32" />
+          <Property Name="YiyecekNo" Type="Int32" />
+          <NavigationProperty Name="Icecek" Relationship="Self.FK__Menu__IcecekNo__7CD98669" FromRole="Menu" ToRole="Icecek" />
+          <NavigationProperty Name="Isletme" Relationship="Self.FK__Menu__IsletmeNo__7DCDAAA2" FromRole="Menu" ToRole="Isletme" />
+          <NavigationProperty Name="Yiyecek" Relationship="Self.FK__Menu__YiyecekNo__0E04126B" FromRole="Menu" ToRole="Yiyecek" />
+          <Property Name="MenuAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuFiyat" Type="Double" />
+        </EntityType>
+        <EntityType Name="Siparis">
+          <Key>
+            <PropertyRef Name="SiparisNo" />
+          </Key>
+          <Property Name="SiparisNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiparisTarih" Type="DateTime" Precision="0" />
+          <Property Name="SiparisTutar" Type="Double" />
+          <Property Name="SiparisAdres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="KullaniciNo" Type="Int32" />
+          <NavigationProperty Name="Fatura" Relationship="Self.FK__Fatura__SiparisN__23F3538A" FromRole="Siparis" ToRole="Fatura" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK__Siparis__Kullani__00AA174D" FromRole="Siparis" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Yiyecek">
+          <Key>
+            <PropertyRef Name="YiyecekNo" />
+          </Key>
+          <Property Name="YiyecekNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YiyecekAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HazirlikSure" Type="Int32" />
+          <Property Name="YiyecekFiyat" Type="Double" />
+          <Property Name="YiyecekAdet" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__Menu__YiyecekNo__0E04126B" FromRole="Yiyecek" ToRole="Menu" />
+        </EntityType>
+        <Association Name="FK__Fatura__SiparisN__23F3538A">
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="0..1" />
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparis">
+              <PropertyRef Name="SiparisNo" />
+            </Principal>
+            <Dependent Role="Fatura">
+              <PropertyRef Name="SiparisNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GirisTip__Kullan__42ACE4D4">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="GirisTip" Type="Self.GirisTip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Principal>
+            <Dependent Role="GirisTip">
+              <PropertyRef Name="KullaniciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GirisTip__Kullan__54CB950F">
+          <End Role="KullaniciTip" Type="Self.KullaniciTip" Multiplicity="0..1" />
+          <End Role="GirisTip" Type="Self.GirisTip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciTip">
+              <PropertyRef Name="KullaniciTipNo" />
+            </Principal>
+            <Dependent Role="GirisTip">
+              <PropertyRef Name="KullaniciTipNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__IcecekNo__7CD98669">
+          <End Role="Icecek" Type="Self.Icecek" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Icecek">
+              <PropertyRef Name="IcecekNo" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="IcecekNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IsletmeKu__Islet__2EA5EC27">
+          <End Role="Isletme" Type="Self.Isletme" Multiplicity="0..1" />
+          <End Role="IsletmeKullanici" Type="Self.IsletmeKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Isletme">
+              <PropertyRef Name="IsletmeNo" />
+            </Principal>
+            <Dependent Role="IsletmeKullanici">
+              <PropertyRef Name="IsletmeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kurye__IsletmeNo__67DE6983">
+          <End Role="Isletme" Type="Self.Isletme" Multiplicity="0..1" />
+          <End Role="Kurye" Type="Self.Kurye" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Isletme">
+              <PropertyRef Name="IsletmeNo" />
+            </Principal>
+            <Dependent Role="Kurye">
+              <PropertyRef Name="IsletmeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__IsletmeNo__7DCDAAA2">
+          <End Role="Isletme" Type="Self.Isletme" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Isletme">
+              <PropertyRef Name="IsletmeNo" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="IsletmeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IsletmeKu__Kulla__43A1090D">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="IsletmeKullanici" Type="Self.IsletmeKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Principal>
+            <Dependent Role="IsletmeKullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Siparis__Kullani__00AA174D">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="KullaniciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__YiyecekNo__0E04126B">
+          <End Role="Yiyecek" Type="Self.Yiyecek" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yiyecek">
+              <PropertyRef Name="YiyecekNo" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="YiyecekNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YemekSiparisEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Fatura" EntityType="Self.Fatura" />
+          <EntitySet Name="GirisTip" EntityType="Self.GirisTip" />
+          <EntitySet Name="Icecek" EntityType="Self.Icecek" />
+          <EntitySet Name="Isletme" EntityType="Self.Isletme" />
+          <EntitySet Name="IsletmeKullanici" EntityType="Self.IsletmeKullanici" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+          <EntitySet Name="KullaniciTip" EntityType="Self.KullaniciTip" />
+          <EntitySet Name="Kurye" EntityType="Self.Kurye" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Siparis" EntityType="Self.Siparis" />
+          <EntitySet Name="Yiyecek" EntityType="Self.Yiyecek" />
+          <AssociationSet Name="FK__Fatura__SiparisN__23F3538A" Association="Self.FK__Fatura__SiparisN__23F3538A">
+            <End Role="Siparis" EntitySet="Siparis" />
+            <End Role="Fatura" EntitySet="Fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GirisTip__Kullan__42ACE4D4" Association="Self.FK__GirisTip__Kullan__42ACE4D4">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="GirisTip" EntitySet="GirisTip" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GirisTip__Kullan__54CB950F" Association="Self.FK__GirisTip__Kullan__54CB950F">
+            <End Role="KullaniciTip" EntitySet="KullaniciTip" />
+            <End Role="GirisTip" EntitySet="GirisTip" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__IcecekNo__7CD98669" Association="Self.FK__Menu__IcecekNo__7CD98669">
+            <End Role="Icecek" EntitySet="Icecek" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IsletmeKu__Islet__2EA5EC27" Association="Self.FK__IsletmeKu__Islet__2EA5EC27">
+            <End Role="Isletme" EntitySet="Isletme" />
+            <End Role="IsletmeKullanici" EntitySet="IsletmeKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kurye__IsletmeNo__67DE6983" Association="Self.FK__Kurye__IsletmeNo__67DE6983">
+            <End Role="Isletme" EntitySet="Isletme" />
+            <End Role="Kurye" EntitySet="Kurye" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__IsletmeNo__7DCDAAA2" Association="Self.FK__Menu__IsletmeNo__7DCDAAA2">
+            <End Role="Isletme" EntitySet="Isletme" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IsletmeKu__Kulla__43A1090D" Association="Self.FK__IsletmeKu__Kulla__43A1090D">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="IsletmeKullanici" EntitySet="IsletmeKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Siparis__Kullani__00AA174D" Association="Self.FK__Siparis__Kullani__00AA174D">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__YiyecekNo__0E04126B" Association="Self.FK__Menu__YiyecekNo__0E04126B">
+            <End Role="Yiyecek" EntitySet="Yiyecek" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <EntitySet Name="Menu_Gor" EntityType="YemekSiparisModel.Menu_Gor" />
+          <EntitySet Name="User_Roles" EntityType="YemekSiparisModel.User_Roles" />
+        </EntityContainer>
+        <EntityType Name="Menu_Gor">
+          <Key>
+            <PropertyRef Name="MenuNo" />
+            <PropertyRef Name="IcecekNo" />
+            <PropertyRef Name="YiyecekNo" />
+          </Key>
+          <Property Name="IsletmeNo" Type="Int32" />
+          <Property Name="MenuFiyat" Type="Double" />
+          <Property Name="MenuAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuNo" Type="Int32" Nullable="false" />
+          <Property Name="IcecekNo" Type="Int32" Nullable="false" />
+          <Property Name="IcecekAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IcecekFiyat" Type="Double" />
+          <Property Name="YiyecekNo" Type="Int32" Nullable="false" />
+          <Property Name="YiyecekAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YiyecekFiyat" Type="Double" />
+        </EntityType>
+        <EntityType Name="User_Roles">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="Int32" Nullable="false" />
+          <Property Name="KullaniciAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MailAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciTipNo" Type="Int32" />
+          <Property Name="KullaniciTipiAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YemekSiparisModelStoreContainer" CdmEntityContainer="YemekSiparisEntities">
+          <EntitySetMapping Name="Fatura">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Fatura">
+              <MappingFragment StoreEntitySet="Fatura">
+                <ScalarProperty Name="FaturaNo" ColumnName="FaturaNo" />
+                <ScalarProperty Name="OdemeBilgisi" ColumnName="OdemeBilgisi" />
+                <ScalarProperty Name="FaturaTarih" ColumnName="FaturaTarih" />
+                <ScalarProperty Name="SiparisNo" ColumnName="SiparisNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GirisTip">
+            <EntityTypeMapping TypeName="YemekSiparisModel.GirisTip">
+              <MappingFragment StoreEntitySet="GirisTip">
+                <ScalarProperty Name="GirisTipNo" ColumnName="GirisTipNo" />
+                <ScalarProperty Name="KullaniciTipNo" ColumnName="KullaniciTipNo" />
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Icecek">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Icecek">
+              <MappingFragment StoreEntitySet="Icecek">
+                <ScalarProperty Name="IcecekNo" ColumnName="IcecekNo" />
+                <ScalarProperty Name="IcecekAd" ColumnName="IcecekAd" />
+                <ScalarProperty Name="IcecekFiyat" ColumnName="IcecekFiyat" />
+                <ScalarProperty Name="IcecekAdet" ColumnName="IcecekAdet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Isletme">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Isletme">
+              <MappingFragment StoreEntitySet="Isletme">
+                <ScalarProperty Name="IsletmeNo" ColumnName="IsletmeNo" />
+                <ScalarProperty Name="IsletmeAd" ColumnName="IsletmeAd" />
+                <ScalarProperty Name="IsletmeTelNo" ColumnName="IsletmeTelNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IsletmeKullanici">
+            <EntityTypeMapping TypeName="YemekSiparisModel.IsletmeKullanici">
+              <MappingFragment StoreEntitySet="IsletmeKullanici">
+                <ScalarProperty Name="IKNo" ColumnName="IKNo" />
+                <ScalarProperty Name="IsletmeNo" ColumnName="IsletmeNo" />
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanici">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+                <ScalarProperty Name="KullaniciAd" ColumnName="KullaniciAd" />
+                <ScalarProperty Name="KullaniciSoyad" ColumnName="KullaniciSoyad" />
+                <ScalarProperty Name="KullaniciTelNo" ColumnName="KullaniciTelNo" />
+                <ScalarProperty Name="MailAdress" ColumnName="MailAdress" />
+                <ScalarProperty Name="KullaniciSifre" ColumnName="KullaniciSifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciTip">
+            <EntityTypeMapping TypeName="YemekSiparisModel.KullaniciTip">
+              <MappingFragment StoreEntitySet="KullaniciTip">
+                <ScalarProperty Name="KullaniciTipNo" ColumnName="KullaniciTipNo" />
+                <ScalarProperty Name="KullaniciTipiAd" ColumnName="KullaniciTipiAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kurye">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Kurye">
+              <MappingFragment StoreEntitySet="Kurye">
+                <ScalarProperty Name="KuryeNo" ColumnName="KuryeNo" />
+                <ScalarProperty Name="KuryeAd" ColumnName="KuryeAd" />
+                <ScalarProperty Name="KuryeSoyad" ColumnName="KuryeSoyad" />
+                <ScalarProperty Name="KuryeTelNo" ColumnName="KuryeTelNo" />
+                <ScalarProperty Name="IsletmeNo" ColumnName="IsletmeNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="MenuFiyat" ColumnName="MenuFiyat" />
+                <ScalarProperty Name="MenuAd" ColumnName="MenuAd" />
+                <ScalarProperty Name="MenuNo" ColumnName="MenuNo" />
+                <ScalarProperty Name="IsletmeNo" ColumnName="IsletmeNo" />
+                <ScalarProperty Name="IcecekNo" ColumnName="IcecekNo" />
+                <ScalarProperty Name="YiyecekNo" ColumnName="YiyecekNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siparis">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Siparis">
+              <MappingFragment StoreEntitySet="Siparis">
+                <ScalarProperty Name="SiparisNo" ColumnName="SiparisNo" />
+                <ScalarProperty Name="SiparisTarih" ColumnName="SiparisTarih" />
+                <ScalarProperty Name="SiparisTutar" ColumnName="SiparisTutar" />
+                <ScalarProperty Name="SiparisAdres" ColumnName="SiparisAdres" />
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yiyecek">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Yiyecek">
+              <MappingFragment StoreEntitySet="Yiyecek">
+                <ScalarProperty Name="YiyecekNo" ColumnName="YiyecekNo" />
+                <ScalarProperty Name="YiyecekAd" ColumnName="YiyecekAd" />
+                <ScalarProperty Name="HazirlikSure" ColumnName="HazirlikSure" />
+                <ScalarProperty Name="YiyecekFiyat" ColumnName="YiyecekFiyat" />
+                <ScalarProperty Name="YiyecekAdet" ColumnName="YiyecekAdet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu_Gor">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Menu_Gor">
+              <MappingFragment StoreEntitySet="Menu_Gor">
+                <ScalarProperty Name="YiyecekFiyat" ColumnName="YiyecekFiyat" />
+                <ScalarProperty Name="YiyecekAd" ColumnName="YiyecekAd" />
+                <ScalarProperty Name="YiyecekNo" ColumnName="YiyecekNo" />
+                <ScalarProperty Name="IcecekFiyat" ColumnName="IcecekFiyat" />
+                <ScalarProperty Name="IcecekAd" ColumnName="IcecekAd" />
+                <ScalarProperty Name="IcecekNo" ColumnName="IcecekNo" />
+                <ScalarProperty Name="MenuNo" ColumnName="MenuNo" />
+                <ScalarProperty Name="MenuAd" ColumnName="MenuAd" />
+                <ScalarProperty Name="MenuFiyat" ColumnName="MenuFiyat" />
+                <ScalarProperty Name="IsletmeNo" ColumnName="IsletmeNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Roles">
+            <EntityTypeMapping TypeName="YemekSiparisModel.User_Roles">
+              <MappingFragment StoreEntitySet="User_Roles">
+                <ScalarProperty Name="KullaniciTipiAd" ColumnName="KullaniciTipiAd" />
+                <ScalarProperty Name="KullaniciTipNo" ColumnName="KullaniciTipNo" />
+                <ScalarProperty Name="MailAdress" ColumnName="MailAdress" />
+                <ScalarProperty Name="KullaniciAd" ColumnName="KullaniciAd" />
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

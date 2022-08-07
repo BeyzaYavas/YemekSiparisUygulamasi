@@ -1,0 +1,51 @@
+﻿@using YemekSiparisProjesi.Models;
+@model Icecek
+@{
+    ViewBag.Title = "IcecekEkle";
+}
+
+
+<div class="heading_container heading_center">
+    <h2>
+        İÇECEK EKLE
+    </h2>
+</div>
+
+<div class="col-lg-10 mx-auto">
+    <form action="/Icecek/IcecekEkle" method="post" role="form">        
+        <div class="form-group">
+            <label for="exampleInputEmail1">İçecek Adı</label>
+            @if (Model.IcecekAd == null)
+            {
+                <input value="" type="text" class="form-control" id="exampleInputEmail1" placeholder="İçecek Adını Giriniz" name="IcecekAd">
+            }
+            else
+            {
+                <input value="@Model.IcecekAd" type="text" class="form-control" id="exampleInputEmail1" placeholder="İçecek Adını Giriniz" name="IcecekAd">
+            }
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">İçecek Fiyatı</label>
+            @if (Model.IcecekAd == null)
+            {
+                <input value="" type="number" class="form-control" id="exampleInputEmail1" placeholder="Fiyat" name="IcecekFiyat">
+            }
+            else
+            {
+                <input value="@Model.IcecekFiyat" type="number" class="form-control" id="exampleInputEmail1" placeholder="Fiyat" name="IcecekFiyat">
+            }
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">İçecek Adet</label>
+            @if (Model.IcecekAd == null)
+            {
+                <input value="" type="number" class="form-control" id="exampleInputEmail1" placeholder="İçecek Adet" name="IcecekAdet">
+            }
+            else
+            {
+                <input value="@Model.IcecekAdet" type="number" class="form-control" id="exampleInputEmail1" placeholder="İçecek Adet" name="IcecekAdet">
+            }
+        </div>            
+        <button type="submit" class="btn btn-info">Kaydet</button>
+    </form>
+</div>
